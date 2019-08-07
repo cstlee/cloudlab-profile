@@ -4,7 +4,8 @@
 # and installation process for a stable dpdk library release.
 
 # Install DPDK's dependancies
-apt-get install -y libnuma-dev
+apt-get update
+apt-get install -y gcc-multilib linux-headers-$(uname -r) libnuma-dev
 
 # It seems easier to get static DPDK library to work based on our experience.
 # For example, as of 04/2018, we haven't been able to get MLX4 driver to work
