@@ -31,15 +31,7 @@ export DEBIAN_FRONTEND=noninteractive
 # Install packages
 echo "Installing common utilities"
 apt-get update
-apt-get -yq install ccache cmake htop mosh vim tmux pdsh tree axel
-
-# Compile googletest from source:
-# https://stackoverflow.com/a/52392930/11495205
-apt-get -yq install libgtest-dev
-pushd /usr/src/googletest/
-cmake .
-cmake --build . --target install
-popd
+apt-get -yq install ccache htop mosh vim tmux pdsh tree axel
 
 echo "Installing NFS"
 apt-get -yq install nfs-kernel-server nfs-common
@@ -48,19 +40,6 @@ echo "Installing performance tools"
 kernel_release=`uname -r`
 apt-get -yq install linux-tools-common linux-tools-${kernel_release} \
         hugepages cpuset msr-tools i7z numactl tuned
-
-echo "Installing RAMCloud dependencies"
-apt-get -yq install build-essential git-core doxygen libpcre3-dev \
-        protobuf-compiler libprotobuf-dev libcrypto++-dev libevent-dev \
-        libboost-all-dev libgtest-dev libzookeeper-mt-dev zookeeper \
-        libssl-dev
-
-# Downgrade to JDK 8.0 to make RAMCloud's java binding happy.
-apt-get -yq remove openjdk*
-apt-get -yq install openjdk-8-jdk
-
-echo "Installing eRPC dependencies"
-apt-get -yq install libgflags-dev
 
 # Install crontab job to run the following script every time we reboot:
 # https://superuser.com/questions/708149/how-to-use-reboot-in-etc-cron-d
