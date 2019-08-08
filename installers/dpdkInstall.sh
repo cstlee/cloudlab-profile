@@ -3,7 +3,8 @@
 # Utility script that automates the download, build configuration, compilation,
 # and installation process for a stable dpdk library release.
 
-# Install DPDK's dependancies
+# Install DPDK's dependencies
+echo "Install DPDK Dependencies"
 apt-get update
 apt-get install -y gcc-multilib linux-headers-$(uname -r) libnuma-dev
 
@@ -17,6 +18,7 @@ DPDK_VER="18.11.2"
 DPDK_SRC="https://fast.dpdk.org/rel/dpdk-${DPDK_VER}.tar.xz"
 DPDK_DIR="dpdk-stable-${DPDK_VER}"
 
+echo "Install DPDK $DPDK_VER"
 pushd /usr/local/src
 wget --no-clobber ${DPDK_SRC}
 tar xvf dpdk-${DPDK_VER}.tar.xz

@@ -41,6 +41,11 @@ kernel_release=`uname -r`
 apt-get -yq install linux-tools-common linux-tools-${kernel_release} \
         hugepages cpuset msr-tools i7z numactl tuned
 
+echo "Install additional packages"
+for installer in /local/repository/installers/*; do
+    /bin/sh $installer
+done
+
 # Install crontab job to run the following script every time we reboot:
 # https://superuser.com/questions/708149/how-to-use-reboot-in-etc-cron-d
 echo "@reboot root /local/repository/boot-setup.sh" > /etc/cron.d/boot-setup
